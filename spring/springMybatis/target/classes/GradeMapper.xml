@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace="接口的完整路径"
+  一对多    查询
+-->
+<mapper namespace="com.nxg.dao.GradeDao">
+<!--  当实体类中的属性与数据库中表的属性（列名） 不一致时  可以自定义属性，与其相关联起来 -->
+<!-- 一对多   -->
+    <resultMap id="t2" type="com.nxg.bean.Grade">
+        <!--先描述自身信息，然后在描述关联表的信息，id表述主键列，非主键列使用result描述 -->
+        <id property="gId" column="gid"></id>
+        <result property="gName" column="gname"></result>
+        <collection property="userList" ofType="com.nxg.bean.User">
+            <id property="userId" column="userid"></id>
+            <result property="username" column="username"></result>
+            <result property="password" column="password"></result>
+            <result property="age" column="age"></result>
+            <result property="sex" column="gender"></result>
+        </collection>
+    </resultMap>
+    <select id="findByGId" resultMap="t2">
+        select * from user u,grade g where u.gid=g.gid and g.gid = #{id}
+    </select>
+<!--    qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq    -->
+<!--  多对一  -->
+    <resultMap id="t3" type="com.nxg.bean.User">
+        <!--先描述自身信息，然后在描述关联表的信息，id表示 主键列，非主键列使用result描述 -->
+        <id property="userId" column="userid"></id>
+        <result property="username" column="username"></result>
+        <result property="password" column="password"></result>
+        <result property="age" column="age"></result>
+        <result property="sex" column="gender"></result>
+        <association property="grade" javaType="com.nxg.bean.Grade">
+            <id property="gId" column="gid"></id>
+            <result property="gName" column="gname"></result>
+        </association>
+    </resultMap>
+    <select id="findAllUser" resultMap="t3">
+        select * from user u ,grade g where u.gid = g.gid
+    </select>
+
+</mapper>

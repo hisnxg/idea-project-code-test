@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="uDao" class="com.nxg.dao.impl.UsersDaoImpl"></bean>
+    <bean id="usersService" class="com.nxg.Service.impl.UsersServiceImpl">
+        <!--  使用set方式-->
+<!--        <property name="属性名-》对应的是生成的set方法，set之后的名称" ref="引用相应的Bean的id，名称"></property>-->
+        <property name="usersDao" ref="uDao"></property>
+    </bean>
+    <!-- 初始化方法-->
+    <bean id="u2" class="com.nxg.bean.Users" init-method="initTest" destroy-method="destroyMethod"></bean>
+
+<!--    给属性赋值时，对象类型选择ref，非对象类型选择value-->
+    <bean id="u3" class="com.nxg.bean.Users">
+        <constructor-arg index="0" value="张三"></constructor-arg>
+        <constructor-arg index="1" value="18"></constructor-arg>
+    </bean>
+<!--    static方法-->
+    <bean id="u4" class="com.nxg.bean.Users" factory-method="getUsers"></bean>
+
+<!--    非静态方法-->
+    <bean id="u5" class="com.nxg.bean.Users"></bean>
+    <bean id="u6" factory-bean="u5" factory-method="getUsers2" ></bean>
+
+</beans>

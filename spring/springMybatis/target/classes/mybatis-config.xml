@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 给实体类起别名 -->
+    <typeAliases>
+        <!--
+        <typeAlias alias="us" type="com.nxg.bean.UserDao2">
+        </typeAlias>-->
+        <!--指定哪些包的类可以使⽤别名,默认别名:类名⾸字⺟⼩写（实际使⽤的时候，全部⼩写也可以做结果映
+        射） -->
+        <package name="com.nxg.bean"></package>
+    </typeAliases>
+
+<!-- 分页插件5.1以后使用-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
+
+<!--连接数据库的 环境，default=“环境id”-->
+    <environments default="a1">
+        <environment id="a1">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://localhost:3306/sys1?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"></property>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+        <environment id="m1">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://localhost:3306/sys1?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+                <property name="username" value="root"></property>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+<!--指定mapper文件的路径，（maven项目从resources源文件下找资源）-->
+    <mappers>
+        <mapper resource="UserMapper.xml"/>
+        <mapper resource="UserMapper2.xml"/>
+        <mapper resource="UserMapper3.xml"/>
+        <mapper resource="UserMapper4.xml"/>
+        <mapper resource="GradeMapper.xml"/>
+    </mappers>
+</configuration>

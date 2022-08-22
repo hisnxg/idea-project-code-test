@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace="接口的完整路径"-->
+<mapper namespace="com.nxg.dao.UserDao2">
+<!--复杂类型查询   in -->
+
+<!--  集合类型-->
+    <select id="findA" resultType="User">
+        select * from user where userId in
+        <foreach collection="list" item="uId" open="(" close=")" separator=",">
+            #{uId}
+        </foreach>
+    </select>
+<!--    数组类型-->
+    <select id="findB" resultType="user">
+        select * from user where userId in
+        <foreach collection="array" item="uId"  open="(" close=")" separator=",">
+            #{uId}
+        </foreach>
+    </select>
+<!--    map集合类型-->
+    <select id="findC" resultType="user" >
+        select * from user where userid in
+        <foreach collection="sid" item="uId" open="(" close=")" separator=",">
+            #{uId}
+        </foreach>
+    </select>
+<!--    模糊查询-->
+<!--     username like '%${username}%'  这种有sql注入风险 -->
+    <select id="findD" resultType="user">
+        select * from user where 1=1
+        <if test="username !=null and username !=''">
+           and username like "%"#{username}"%"
+        </if>
+        <if test="userId!=null and userId!=''">
+            and userid = #{userId}
+        </if>
+    </select>
+    <select id="findF" resultType="user">
+        <!-- select * from user where userid between #{begin} and #{end}-->
+        select * from user where userid >= #{begin} and userid <![CDATA[ <= ]]> #{end}
+    </select>
+</mapper>

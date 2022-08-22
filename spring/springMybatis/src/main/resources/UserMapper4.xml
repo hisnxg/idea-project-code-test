@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace="接口的完整路径"-->
+<mapper namespace="com.nxg.dao.UserDao4">
+<!--  当实体类中的属性与数据库中表的属性（列名） 不一致时  可以自定义属性，与其相关联起来 -->
+    <resultMap id="t1" type="com.nxg.bean.User">
+        <result property="sex" column="gender"></result>
+    </resultMap>
+    <!--id="方法名"
+       给包取别名   使用别名 user
+       resultMap 结果映射
+    -->
+    <select id="getAll" resultMap="t1">
+        select * from user
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.nxg.bean.User">
+        select * from user where userId=#{id}
+    </select>
+    <!--增删改返回的是受影响的行数，不需要配置resultType
+    添加数据，获取该数据的id
+    -->
+    <insert id="insertUser" parameterType="com.nxg.bean.User" useGeneratedKeys="true" keyProperty="userId">
+        insert into User(username,password,age) values(#{username},#{password},#{age});
+    </insert>
+    <insert id="insertUser3" parameterType="com.nxg.bean.User">
+        insert into user(username,password,age) values(#{uname},#{pwd},#{age})
+    </insert>
+<!-- 使用map方式 存值查询到的值-->
+    <select id="find" resultType="map">
+        select max(userid) maxId,min(userId) minId,avg(userId) avg from user
+    </select>
+
+</mapper>

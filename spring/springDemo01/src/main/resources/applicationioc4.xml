@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+     autosire自动注入 （由程序自动给属性赋值） 装配
+     no 不自动装配（默认值）
+     当是byName时 ，注入id与要保持一致 usersDao，即属性名=id名，调用set方法赋值
+     byType 属性的类型和id对象的类型相同，当找到多个同类型的对象时会报错，调取set方法赋值。
+
+     constructor 构造方法的参数类型和id对象的类型相同，当没找到时报错，调取构造方法赋值
+    -->
+    <bean id="uDao" class="com.nxg.dao.impl.UsersDaoImpl2"></bean>
+    <bean id="uService" class="com.nxg.Service.impl.UsersServiceImpl" autowire="constructor">
+    </bean>
+
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--复杂类型-->
+    <bean id="u1" class="com.nxg.bean.Users"></bean>
+    <bean id="t1" class="com.nxg.bean.Teacher">
+
+    <property name="objects">
+        <array>
+            <value>张三1</value>
+            <value>张三1</value>
+            <value>张三1</value>
+            <ref bean="u1"></ref>
+        </array>
+
+    </property>
+        <property name="list">
+            <list>
+                <value>张三</value>
+                <value>18</value>
+                <value>122saaldj</value>
+                <ref bean="u1"></ref>
+            </list>
+        </property>
+        <property name="set">
+            <set>
+                <value>张三</value>
+                <value>18</value>
+                <value>asdfgh</value>
+                <ref bean="u1"></ref>
+            </set>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="班长" value="刘能"></entry>
+                <entry key="校花" value="小花"></entry>
+                <entry key="user" value-ref="u1"></entry>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="username">root</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

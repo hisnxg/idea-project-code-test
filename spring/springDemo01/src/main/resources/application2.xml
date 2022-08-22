@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- IOC中的DI（依赖注入）  1.通过set注入
+       2.通过构造方法
+ -->
+
+    <bean id="stu1" class="com.nxg.bean.Student">
+        <property name="stuname" value="张三"></property>
+    </bean>
+    <bean id="stu2" class="com.nxg.bean.Student">
+<!-- stu2的name与stu1的name相同  -->
+        <constructor-arg name="stuname" value="#{stu1.stuname}"></constructor-arg>
+        <constructor-arg name="stuAge" value="18" ></constructor-arg>
+        <constructor-arg name="sex" value="男"></constructor-arg>
+    </bean>
+<!--EL表达式绑定形式-->
+<!--    首先需要引入p命名空间-->
+    <bean id="stu3" class="com.nxg.bean.Student" p:stuname="ag" p:sex="女" p:stuAge="18"  ></bean>
+
+</beans>
