@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9323681c-d0e9-4053-9b40-c24ebcc6fc2f" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="D:\Program Files (x86)\Git\bin\git.exe" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\utilData\maven\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../../../utilData/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="D:\utilData\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_HOME" />
+  </component>
+  <component name="ProjectId" id="26mT5BHMQifG0J3Xws5Pr1CrlUK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9323681c-d0e9-4053-9b40-c24ebcc6fc2f" name="Default Changelist" comment="" />
+      <created>1648027575472</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648027575472</updated>
+      <workItem from="1648027576872" duration="1831000" />
+      <workItem from="1648117196661" duration="6000" />
+      <workItem from="1648133581567" duration="1013000" />
+      <workItem from="1648284155318" duration="6926000" />
+      <workItem from="1648467263512" duration="2438000" />
+      <workItem from="1649152530087" duration="597000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="830" y="336" key="#com.intellij.ide.util.MemberChooser" timestamp="1648471937001">
+      <screen x="0" y="0" width="2048" height="1240" />
+    </state>
+    <state x="830" y="336" key="#com.intellij.ide.util.MemberChooser/0.0.2048.1240@0.0.2048.1240" timestamp="1648471937001" />
+    <state x="531" y="204" key="SettingsEditor" timestamp="1648467311477">
+      <screen x="0" y="0" width="2048" height="1240" />
+    </state>
+    <state x="531" y="204" key="SettingsEditor/0.0.2048.1240@0.0.2048.1240" timestamp="1648467311477" />
+    <state x="439" y="220" key="new project wizard" timestamp="1648467366856">
+      <screen x="0" y="0" width="2048" height="1240" />
+    </state>
+    <state x="439" y="220" key="new project wizard/0.0.2048.1240@0.0.2048.1240" timestamp="1648467366856" />
+    <state x="686" y="262" key="run.anything.popup" timestamp="1648471726581">
+      <screen x="0" y="0" width="2048" height="1240" />
+    </state>
+    <state x="686" y="262" key="run.anything.popup/0.0.2048.1240@0.0.2048.1240" timestamp="1648471726581" />
+    <state x="687" y="275" width="672" height="678" key="search.everywhere.popup" timestamp="1648287835065">
+      <screen x="0" y="0" width="2048" height="1240" />
+    </state>
+    <state x="687" y="275" width="672" height="678" key="search.everywhere.popup/0.0.2048.1240@0.0.2048.1240" timestamp="1648287835065" />
+  </component>
+</project>
