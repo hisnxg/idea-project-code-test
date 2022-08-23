@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--表示告知spring 要扫描的包
+    这些包以及子包当中的类如果添加了@Component注解,这些添加的类就交给了spring容器创建对象
+    注意:在beans标签中添加xmlns:context="http://www.springframework.org/schema/context"
+         http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+    -->
+    <!--  多个包的扫描:方式1: 使用多个 <context:component-scan 表明 -->
+    <context:component-scan base-package="com.xzk.dao"></context:component-scan>
+    <context:component-scan base-package="com.xzk.service"></context:component-scan>
+    <context:component-scan base-package="com.xzk.controller"></context:component-scan>
+    <!--  多个包的扫描:方式2: base-package中直接声明要扫描的多个包, 多个值可以使用逗号\分号\空格分割,推荐使用逗号-->
+    <context:component-scan base-package="com.xzk.dao,com.xzk.service,com.xzk.controller"></context:component-scan>
+    <!--  多个包的扫描:方式3: base-package中直接声明要扫描的多个包的父包-->
+    <context:component-scan base-package="com.xzk"></context:component-scan>
+    </beans>

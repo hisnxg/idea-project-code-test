@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件  ORM object relation Mappping
+    SQL语句从代码的硬编码中抽取出来了
+-->
+<!--namespace="名称必须与映射的类的名字一致,是完全限定名"-->
+<mapper namespace="com.xzk.mapper.TeamMapper">
+    <!--动态 SQL 语句
+    多条件查询：
+    模糊查询的写法可以使用3种方式：
+    方式1： and teamName like #{name} ,传递参数的时候带上%，例如vo.setName("%人%")
+    方式2： and teamName like ‘%${name}%’ 传递参数的时候没有%，例如vo.setName("人")
+    方式3： and teamName like concat(concat('%',#{name}),'%') 例如vo.setName("人")
+    concat(str1,str2)函数是字符串拼接使用-->
+    <select id="queryByVO" parameterType="QueryVO" resultMap="baseResultMap">
+        select * from team
+        <where>
+            <!--如果用户输入名称,就模糊查询 and teamName like '%?%'
+            使用这种美元符号方式 and teamName like '%${name}%' 缺点是sql注入时容易出问题,所有使用#{}
+            而需要使用#{}就需要使用 concat()函数 进行字符串拼接
+            test="条件"
+            -->
+            <if test="name!=null">
+                and teamName like concat(concat('%',#{name}),'%')
+            </if>
+            <if test="beginTime!=null">
+                and createTime>=#{beginTime}
+            </if>
+            <if test="endTime!=null">
+                and createTime&lt;=#{endTime}
+            </if>
+            <if test="location!=null">
+                and location=#{location}
+            </if>
+        </where>
+    </select>
+
+    <update id="teamUpdate1" parameterType="com.xzk.pojo.Team1">
+        update team
+        <set>
+            <if test="teamName!=null">
+                teamName=#{teamName},
+            </if>
+            <if test="location!=null">
+                location=#{location},
+            </if>
+            <if test="createTime!=null">
+                createTime=#{createTime}
+            </if>
+        </set>
+        where teamId=#{teamId}
+    </update>
+    <!--批量添加-->
+    <insert id="addList" parameterType="arraylist">
+        insert into team(teamName,location) values
+        <!--collection:要遍历的集合；参数是集合类型，直接写list
+item:遍历的集合中的每一个数据
+separator：将遍历的结果用，分割-->
+        <foreach collection="list" item="t" separator=",">
+            (#{t.teamName},#{t.location})
+        </foreach>
+    </insert>
+    <delete id="delList">
+        delete from team where teamId in
+        <foreach collection="list" item="teamId" separator="," open="(" close=")">
+            #{teamId}
+        </foreach>
+    </delete>
+
+
+    <!-- 只有返回的结果是单行的时候，返回值类型才可以指定为基本类型
+如果是单行多列，也取不到后面的列的值;
+如果返回多行会报异常：TooManyResultsException-->
+    <select id="getTwoColumnList" resultType="java.util.HashMap">
+        select count(teamId) as 'sum',max(teamId) as 'max' from team group by location
+    </select>
+    <select id="getTwoColumn" resultType="java.util.HashMap">
+        select count(teamId) as 'sum',max(teamId) as 'max' from team
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(teamId) from team
+    </select>
+
+
+    <select id="queryByName" resultType="com.xzk.pojo.Team1">
+        select * from team where teamName=#{teamName}
+    </select>
+    <select id="queryByLocation" resultType="com.xzk.pojo.Team1">
+        select * from team where location=#{location}
+    </select>
+
+    <select id="queryByFiled" resultType="com.xzk.pojo.Team1">
+        select * from team where ${colmn}=#{colmnValue}
+    </select>
+    <!--多个参数：标签中不需要parameterType属性
+    方式1：通过下标索引的方式,还有两种方式（太难记了，可以忽略，看看演示就好啦）
+    select * from team where teamId &gt;=#{arg0} and teamId &lt;=#{arg1}; 也可以，注意下表索引
+    细节1：
+    mybatis3.3版本之前：可以直接写#{0} #{1}
+    从mybatis3.4开始：#{arg0} #{arg1}... 或者是 #{param1} #{param2}...
+    细节2：
+    sql语句中不能使用小于号，使用转移符号替换;大于号没有限制，也可以使用转义符号替换&gt;
+    -->
+    <select id="queryByRange1" resultType="com.xzk.pojo.Team1">
+     select * from team where teamId>=#{arg0} and teamId &lt;=#{arg1}
+    </select>
+    <!--方式2 #{}中的名称必须与接口的方法的参数注解@Param()保持一致-->
+    <select id="queryByRange2" resultType="com.xzk.pojo.Team1">
+        select * from team where teamId>=#{min} and teamId &lt;=#{max}
+    </select>
+    <!--方式2 #{}中的名称必须与map保持一致-->
+    <select id="queryByRange3" resultType="com.xzk.pojo.Team1">
+        select * from team where teamId>=#{min} and teamId &lt;=#{max}
+    </select>
+    <select id="queryCondition" resultType="com.xzk.pojo.Team1">
+        select * from team where teamId>=#{min} and teamId &lt;=#{max} and teamName like #{name} and location=#{location}
+    </select>
+
+    <!--删除  parameterType可以省略 , 对于单个参数-->
+    <delete id="teamDelete">
+        delete from team where teamId=#{id}
+    </delete>
+
+    <update id="teamUpdate" parameterType="com.xzk.pojo.Team1">
+        update team set teamName=#{teamName},location=#{location} where teamId=#{teamId}
+    </update>
+
+    <!--添加一个球队
+parameterType="com.kkb.pojo.Team" 将对象作为参数，
+#{值} 值必须是实体类中的属性名称，其实就是占位符？
+-->
+    <insert id="teamAdd" parameterType="com.xzk.pojo.Team1">
+        <!--新增成功之后将自增的Id赋值给参数属性teamId
+        keyProperty:表示新增的id值赋值到哪个属性值中
+        order:AFTER/BEFORE两个取值,表示selectKey中的sql语句在insert语句之前还是之后执行
+        resultType:表示返回值类型
+        -->
+        <selectKey keyProperty="teamId" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into team(teamName,location,createTime) values(#{teamName},#{location},#{createTime})
+    </insert>
+
+    <!--id="自定义名称,id不能重复:相当于dao中的方法"
+    resultType="返回的类型,如果是集合的时候,写的是集合中元素的类型" 使用的要求:实体类中的属性名与表中的列名一致
+    -->
+    <select id="queryAll" resultType="com.xzk.pojo.Team1">
+    select * from team;
+  </select>
+    <!--parameterType:表示参数的类型,参数唯一的时候才使用该属性:可以省略的,框架可以自己判定类型
+     #{自定义的参数名称} 名称没有实际意义
+     -->
+    <select id="queryById" parameterType="java.lang.Integer" resultType="Team1">
+        select * from team where teamId=#{id};
+    </select>
+
+    <!--resultMap 和resultType不能同时出现
+resultMap：是引用的自己创建resultMap的id-->
+    <select id="queryAll2" resultMap="baseResultMap">
+        select * from team;
+    </select>
+    <!--创建resultMap：相当于自己编写表中的列与实体类中的属性的映射
+id:resultMap的名称，要求唯一
+type：期待要映射为java的类型
+-->
+    <resultMap id="baseResultMap" type="com.xzk.pojo.Team1">
+        <!--一般主键列用id,其余列用result
+        column：表示数据库表中的列名，不区分大小写
+        property：表示实体类中的对应的属性名，区分大小写
+        javaType：实体类中的对应的属性的类型，可以省略，mybatis会自己推断
+        jdbcType="数据库中的类型column的类型" 一般省略
+        -->
+        <id column="teamId" property="teamId" javaType="java.lang.Integer" ></id>
+        <result column="teamName" property="teamName" javaType="java.lang.String"></result>
+        <result column="location" property="location" javaType="java.lang.String"></result>
+        <result column="createTime" property="createTime" javaType="java.util.Date"></result>
+    </resultMap>
+
+
+    <select id="queryById1" resultMap="joinResult1">
+        select * from team t join player p
+        on t.teamId=p.teamId where t.teamId=#{id};
+    </select>
+    <select id="queryById2" resultMap="joinResult2">
+        select * from team where teamId=#{id};
+    </select>
+
+    <!--方式1：
+        对多的连接查询：对多使用collection
+        property="关联对象的集合名称"
+        javaType="关联对象的集合类型"
+        ofType="关联对象的集合的泛型"
+        resultMap="引用关联对象的结果映射"
+        -->
+    <resultMap id="joinResult1" type="Team1" extends="baseResultMap">
+        <collection property="playerList1" javaType="java.util.ArrayList" ofType="Player"
+                    resultMap="com.xzk.mapper.PlayerMapper.baseResultMap"></collection>
+    </resultMap>
+    <!--方式2：
+    对多的连接查询：对多使用collection
+    property="关联对象的集合名称"
+    javaType="关联对象的集合类型"
+    ofType="关联对象的集合的泛型"
+    select="引用关联对象的单独查询的方法"：使用的前提是关联对象中该方法可用
+    column="引用关联对象的单独查询的方法的参数,一般是外键"
+    -->
+    <resultMap id="joinResult2" type="Team1" extends="baseResultMap">
+        <collection property="playerList2" javaType="java.util.ArrayList"
+                    select="com.xzk.mapper.PlayerMapper.queryByTeamId" column="teamId"></collection>
+    </resultMap>
+
+</mapper>

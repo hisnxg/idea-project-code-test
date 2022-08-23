@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--spring容器创建对象的方式
+        1.通过默认构造方法
+        2.通过带参数的构造方法
+        3.通过工厂方法： 实例方法，静态方法
+    -->
+    <!-- 1.通过默认构造方法   -->
+    <bean id="team1" class="com.xzk.pojo.Team"></bean>
+    <!--    2.通过带参数的构造方法-->
+    <bean id="team2" class="com.xzk.pojo.Team">
+        <constructor-arg name="id" value="1001"></constructor-arg>
+        <constructor-arg name="name" value="勇士"></constructor-arg>
+        <constructor-arg name="location" value="金州"></constructor-arg>
+    </bean>
+    <bean id="team3" class="com.xzk.pojo.Team">
+    <!--  index：表示参数的下标索引     -->
+        <constructor-arg index="0" value="1002"></constructor-arg>
+        <constructor-arg index="1" value="热火"></constructor-arg>
+        <constructor-arg index="2" value="迈阿密"></constructor-arg>
+    </bean>
+    <!--    3.1通过工厂方法： 静态方法 Team team1 = MyFactory.staticFun();-->
+    <bean id="staticTeam" class="com.xzk.pojo.MyFactory" factory-method="staticFun"></bean>
+    <!--    3.2通过工厂方法： 实例方法  需要先创建工厂,再调用实例方法
+    MyFactory myFactory = new MyFactory();
+    Team team = myFactory.instanceFun();-->
+    <bean id="factory" class="com.xzk.pojo.MyFactory"></bean>
+    <bean id="instanceTeam" factory-bean="factory" factory-method="instanceFun"></bean>
+</beans>

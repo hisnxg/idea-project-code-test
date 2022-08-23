@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis全局配置文件  注意 节点先后 顺序：查看属性Ctrl+点击configuration进入查看即可-->
+<configuration>
+    <!--全局配置文件引入属性文件-->
+    <properties resource="jdbc.properties"/>
+
+    <!--配置日志，注意顺序：查看属性点击configuration进入查看即可-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--自定义类型别名  (对namespace不起作用)-->
+    <typeAliases>
+        <!--对单个的实体类定义别名-->
+        <!--<typeAlias type="com.xzk.pojo.Team" alias="Team"/>-->
+        <!--推荐写法：批量定义别名：扫描指定包下的所有类，同时别名定义为类名，别名的首字母大小写都可以-->
+        <package name="com.xzk.pojo"/>
+    </typeAliases>
+    <!-- 引入 pageHelper插件 -->
+    <!--注意这里要写成PageInterceptor, 5.0之前的版本都是写PageHelper, 5.0之后要换成PageInterceptor-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--reasonable：分页合理化参数，默认值为false,直接根据参数进行查询。
+            当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。
+            方言可以省略，会根据连接数据的参数url自动推断-->
+            <!--<property name="reasonable" value="true"/>-->
+        </plugin>
+    </plugins>
+    <!--    配置mybatis的环境-->
+    <environments default="development">
+        <!-- id:数据源名称-->
+        <environment id="development">
+            <!--事务的类型:JDBC 使用Connection 对象的提交和回滚的方法-->
+            <transactionManager type="JDBC"/>
+            <!--创建数据源:POOLED 方式  使用连接-->
+            <dataSource type="POOLED">
+                <!--创建数据源必备4大参数-->
+                <!--<property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost/mybatis?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--在配置文件中注册映射文件-->
+    <mappers>
+        <mapper resource="com/xzk/pojo/Team.xml"/>
+        <mapper resource="com/xzk/mapper/TeamDaoMapper.xml"/>
+        <mapper resource="com/xzk/mapper/GameRecordDaoMapper.xml"/>
+        <mapper resource="com/xzk/mapper/UsersMapper.xml"/>
+        <mapper resource="com/xzk/mapper/playerMapper.xml"/>
+    </mappers>
+</configuration>

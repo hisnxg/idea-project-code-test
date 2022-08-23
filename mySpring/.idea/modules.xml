@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kuaidiezhan1/kuaidiezhan1.iml" filepath="$PROJECT_DIR$/kuaidiezhan1/kuaidiezhan1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../kuaidiezhan1.1/kuaidiezhan1.1.iml" filepath="$PROJECT_DIR$/../kuaidiezhan1.1/kuaidiezhan1.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis1/mybatis1.iml" filepath="$PROJECT_DIR$/mybatis1/mybatis1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring/spring.iml" filepath="$PROJECT_DIR$/spring/spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring01/spring01.iml" filepath="$PROJECT_DIR$/spring01/spring01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring02/spring02.iml" filepath="$PROJECT_DIR$/spring02/spring02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../spring03-aop/spring03.iml" filepath="$PROJECT_DIR$/../spring03-aop/spring03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring03-aop/spring03-aop.iml" filepath="$PROJECT_DIR$/spring03-aop/spring03-aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring04-jdbc/spring04-jdbc.iml" filepath="$PROJECT_DIR$/spring04-jdbc/spring04-jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../spring04-jdbc/spring04-jdbc (1).iml" filepath="$PROJECT_DIR$/../spring04-jdbc/spring04-jdbc (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/springmvc/springmvc.iml" filepath="$PROJECT_DIR$/springmvc/springmvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../studentSystem1.1/studentSystem1.1.iml" filepath="$PROJECT_DIR$/../studentSystem1.1/studentSystem1.1.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--扫描Controller,并将其生命周期纳入Spring管理-->
+    <context:annotation-config/>
+    <!--springmvc的配置文件:控制器的bean对象都在这里扫描-->
+    <context:component-scan base-package="com.xzk.controller"/>
+    <mvc:annotation-driven/>
+    <!--视图解析器-->
+    <bean id="internalResourceViewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+    <!--静态资源处理-->
+    <mvc:resources location="/css" mapping="/css/**"/>
+    <mvc:resources location="/fonts" mapping="/fonts/**"/>
+    <mvc:resources location="/img" mapping="/img/**"/>
+    <mvc:resources location="/js" mapping="/js/**"/>
+    <mvc:resources location="/pages" mapping="/pages/**" />
+    <mvc:resources location="/static" mapping="/static/**" />
+<!--    &lt;!&ndash;静态页面，如html,css,js,images可以访问&ndash;&gt;-->
+<!--    <mvc:default-servlet-handler />-->
+    <!--文件上传-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    </bean>
+</beans>

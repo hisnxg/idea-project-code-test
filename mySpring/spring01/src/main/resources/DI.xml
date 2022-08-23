@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="teamDao" class="com.xzk.dao.TeamDao"></bean>
+    <bean id="teamService" class="com.xzk.service.TeamService">
+        <!--使用set方法注入属性值   ref表示 引入-->
+        <property name="teamDao" ref="teamDao"></property>
+    </bean>
+
+    <bean id="teamService2" class="com.xzk.service.TeamService">
+        <!--使用构造方法注入属性值   ref表示 引入-->
+        <constructor-arg name="teamDao" ref="teamDao"></constructor-arg>
+    </bean>
+
+    <!--    自动注入 autowire="byName/byType"
+    使用byName
+    查询与属性名称相同的容器中的对象-->
+    <bean id="teamService3" class="com.xzk.service.TeamService" autowire="byName">
+    </bean>
+
+    <!--    自动注入 autowire="byName/byType"
+    使用byType
+    查询与属性值相同类型的容器中的对象,但是要求类型相同的对象唯一,否者抛出异常:不知道用哪一个匹配
+    -->
+    <bean id="teamService4" class="com.xzk.service.TeamService" autowire="byType">
+    </bean>
+
+</beans>

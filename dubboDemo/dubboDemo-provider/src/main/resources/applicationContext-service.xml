@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        <!-- 当前应用名称，用于注册中心计算应用间依赖关系，注意：消费者和提供者应用名不要一样 -->
+        <dubbo:application name="dubboDemo-provider"></dubbo:application>
+        <!-- 连接服务注册中心zookeeper ip为zookeeper所在服务器的ip地址-->
+        <dubbo:registry address="zookeeper://139.224.55.130:2181"/>
+        <!-- 注册 协议和port 默认20880-->
+        <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+        <!-- 扫描指定包，加入@Service注解的类会被发布为服务 -->
+        <dubbo:annotation package="com.nxg.service.impl" />
+        
+        <!--使用配置的方式发布服务 缺点：配置繁琐 -->
+<!--        <bean id="helloService" class="com.nxg.service.impl.HelloServiceImpl"></bean>-->
+<!--        <dubbo:service interface="com.nxg.service.HelloService" ref="helloService"></dubbo:service>-->
+        <!--生成远程服务代理对象-->
+<!--        <dubbo:reference id="hellosService" interface="com.nxg.service.HelloService"></dubbo:reference>-->
+<!--        <context:component-scan base-package=""-->
+        <!--数据源-->
+        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+                <property name="username" value="root"></property>
+                <property name="password" value="123456"></property>
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+                <property name="url" value="jdbc://localhost:3306/springboot"></property>
+        </bean>
+        <!--事务管理器 -->
+        <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource" ref="dataSource"></property>
+        </bean>
+        <!--开启事务控制的注解支持-->
+        <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"></tx:annotation-driven>
+
+</beans>

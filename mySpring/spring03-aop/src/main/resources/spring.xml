@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--在beans中标签中引入aop切面 和 context约束-->
+    <context:component-scan base-package="com.xzk.service,com.xzk.aop"/>
+
+    <!--启用aspect注解  代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <!--xml方式实现aop -->
+    <aop:config>
+        <!--声明切入点的表达式, 可以声明多个-->
+        <aop:pointcut id="pt1" expression="execution(* com.xzk.service..*.*(..))"/>
+        <aop:pointcut id="pt2" expression="execution(* com.xzk.service..*.add*(..))"/>
+        <aop:pointcut id="pt3" expression="execution(* com.xzk.service..*.update*(..))"/>
+        <aop:aspect ref="myAOP">
+            <aop:before method="before" pointcut-ref="pt1"></aop:before>
+            <aop:around method="around" pointcut-ref="pt1"></aop:around>
+            <aop:after-returning method="afterReturn" pointcut-ref="pt2" returning="result"></aop:after-returning>
+            <aop:after-throwing method="exception" pointcut-ref="pt2" throwing="tw"></aop:after-throwing>
+            <aop:after method="myFinally" pointcut-ref="pt3"></aop:after>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

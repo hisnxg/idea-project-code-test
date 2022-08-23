@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzk.mapper.PlayerMapper">
+
+
+    <select id="queryAll" resultMap="baseResultMap">
+            select * from player where playerId=#{id}
+        </select>
+
+        <select id="queryAll1" resultMap="JoinTeamResult1">
+            select * from player p inner join team t
+            on p.teamId=t.teamId where playerId=#{id}
+        </select>
+        <resultMap id="baseResultMap" type="Player">
+            <id column="playerId" property="playerId"/>
+            <result column="playerName" property="playerName"/>
+            <result column="playerNum" property="playerNum"/>
+            <result column="teamId" property="teamId"/>
+        </resultMap>
+        <!-- 方式1:通过关联对象打点调用属性的方式
+         要求：连接查询
+         如果连接查询，一般单独定义resultMap
+         extends="表示继承的其他的resultMap的id"
+         -->
+    <resultMap id="JoinTeamResult1" type="Player" extends="baseResultMap">
+        <id column="teamId" property="team1.teamId"/>
+        <result column="teamName" property="team1.teamName"/>
+        <result column="location" property="team1.location"/>
+        <result column="createTime" property="team1.createTime"/>
+    </resultMap>
+
+    <!--方式2:直接引用关联对象的Mapper映射：要求连接查询
+    property="关联对象的属性名"
+    javaType="关联对象的类型"
+    resultMap="关联对象的命名空间中的resultMap"
+    -->
+    <select id="queryById2" resultMap="JoinTeamResult2">
+        select * from player p inner join team t
+        on p.teamId=t.teamId where playerId=#{id}
+    </select>
+    <resultMap id="JoinTeamResult2" type="Player" extends="baseResultMap">
+        <association property="team2" javaType="Team1"
+                     resultMap="com.xzk.mapper.TeamMapper.baseResultMap"></association>
+    </resultMap>
+
+    <!--方式3:直接引用关联对象的单独查询的方法：要求：关联对象的Maper中必须要求有单独的查询方法
+        property="关联对象的属性名"
+        javaType="关联对象的类型"
+        select="关联对象的单独查询的语句"
+        column="外键列"
+        -->
+    <select id="queryById3" resultMap="JoinTeamResult3">
+        select * from player where playerId=#{id}
+    </select>
+    <resultMap id="JoinTeamResult3" type="Player" extends="baseResultMap">
+        <association property="team3" javaType="Team1"
+                     select="com.xzk.mapper.TeamMapper.queryById" column="teamId"></association>
+    </resultMap>
+    <!--方式2 3 根据实际情况选择性的使用  方式1很少使用-->
+
+
+    <select id="queryByTeamId" resultType="Player">
+          select * from player where teamId=#{id}
+    </select>
+</mapper>

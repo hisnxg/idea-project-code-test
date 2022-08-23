@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+        <bean id="user1" class="com.nxg.spring.pojo.User" init-method="init" destroy-method="destory"></bean>
+    <bean id="user2" class="com.nxg.spring.pojo.User"></bean>
+    <bean id="user3" class="com.nxg.spring.pojo.User"></bean>
+    <!--通过spring调用工厂中创建对象的方法-->
+    <!--静态方法-->
+    <bean id="user4" class="com.nxg.spring.factory.UserFactory" factory-method="getUserStaticInstance"></bean>
+    <!-- 实例方法-->
+    <bean id="factory" class="com.nxg.spring.factory.UserFactory"></bean>
+    <bean id="user5" factory-bean="factory" factory-method="getUserInstance"></bean>
+
+
+</beans>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../kuaidiezhan1.1" />
+    <file type="web" url="file://$PROJECT_DIR$/kuaidiezhan1" />
+    <file type="web" url="file://$PROJECT_DIR$/springmvc" />
+    <file type="web" url="file://$PROJECT_DIR$/../studentSystem1.1" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/spring01/pom.xml" />
+        <option value="$PROJECT_DIR$/spring02/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring03/pom.xml" />
+        <option value="$PROJECT_DIR$/../spring04-jdbc/pom.xml" />
+        <option value="$PROJECT_DIR$/spring03-aop/pom.xml" />
+        <option value="$PROJECT_DIR$/spring04-jdbc/pom.xml" />
+        <option value="$PROJECT_DIR$/../test1/pom.xml" />
+        <option value="$PROJECT_DIR$/springmvc/pom.xml" />
+        <option value="$PROJECT_DIR$/kuaidiezhan1/pom.xml" />
+        <option value="$PROJECT_DIR$/../../college/J截图/SSM/mvc/mybatis01/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis1/pom.xml" />
+        <option value="$PROJECT_DIR$/../kuaidiezhan1.1/pom.xml" />
+        <option value="$PROJECT_DIR$/../studentSystem1.1/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

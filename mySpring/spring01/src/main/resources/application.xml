@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- spring配置文件
+    beans:根标签
+        spring中java的对象成为java bean
+        spring-beans.xsd 是一个约束文件  约束xml文件中都能编写哪些标签
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 创建对象:声明bean,告知spring容器创建哪些对象
+            一个bean标签表示一个对象
+            id="对象名",要求唯一
+            class="完全限定名" spring底层是通过反射方式创建对象,不能写接口
+            相当于com.xzk.pojo.Team team1 = new com.xzk.pojo.Team();然后将创建的对象放入spring容器的一个Map集合中
+            springMap.put(id,对象),例如spring.Map.put("team1",new Team());
+            scope="singleton/prototype"
+                singleton:单例,默认值,容器启动完毕之后单例对象就被创建了,而且容器中只有唯一的一个对象
+                prototype:多例,多例的对象是什么时候使用什么时候创建,每次取的时候都创建新的对象
+            lazy-init="true/false" 是否懒加载.针对单例对象
+                true: 真懒  获取对象的时候创建
+                false:不懒  立即创建对象,不管是否使用
+             生命周期相关:
+             init-method="对象创建完毕之后立即调用的初始化方法"
+             destroy-method="spring容器调用的销毁方法的时候执行的方法"
+    -->
+    <bean id="team1" name="team1" class="com.xzk.pojo.Team" scope="singleton" lazy-init="true" init-method="init" destroy-method="destroy"></bean>
+    <bean id="team2" name="team2" class="com.xzk.pojo.Team" scope="prototype"></bean>
+
+    <!--    非自定对象的创建-->
+    <bean id="date1" class="java.util.Date"></bean>
+</beans>
